@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { styles } from '../styles'
-// import { NavLinks } from '../constants'
+import { navLinks } from '../constants'
 import { logo, menu, close } from '../assets'
 
 
@@ -19,9 +19,23 @@ const Navbar = () => {
           window.scrollTo(0, 0);
         }}>
           <img src={logo} alt="logo" className="w-20 h-auto object-contain"/>
-          <p className="text-white text-[18px] font-bold cursor-pointer">
-            Ngan | <span > Portfolio</span></p>
+          <p className="text-white text-[20px] font-bold cursor-pointer">
+            Ngan | <span className="navi sm:block hidden md:inline-block"> Portfolio</span></p>
         </Link>
+        <ul className='list-none hidden sm:flex flex-row gap-10'>
+            {
+              navLinks.map((item) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <li key={item.id} className={`${
+                    active === item.id ? 'text-blue-300' : 'text-secondary'
+                  } outline-none`}>
+                    <a href={`#${item.id}`} className=' hover:text-blue-300 text-[18px] cursor-pointer outline-none' onClick={() => setActive(item.id)}>
+                      {item.title}
+                    </a>
+                  </li>
+              ))
+            }
+        </ul>
       </div>
     </nav>
   )
